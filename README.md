@@ -8,7 +8,7 @@ gcloud auth application-default login
 gcloud config set project <YOUR_PROJECT_ID>
 gcloud config set compute/region <GCP REGION>
 
-cd open-node
+cd chain-node
 
 # Create GKE cluster, add one full node
 ./setup.sh
