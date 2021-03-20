@@ -15,6 +15,7 @@ cd open-node
 
 # Add full node
 ./add-node.sh
+```
 
 ### Use terraform to create GKE cluster
 ```
