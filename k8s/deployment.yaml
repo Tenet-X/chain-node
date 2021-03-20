@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: YOUR_NODE_NAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: YOUR_NODE_NAME
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: YOUR_NODE_NAME
+        type: full
+    spec:
+      containers:
+      - name: polkdot-geth-node
+        image: "ethereum/client-go"
+        imagePullPolicy: Always
+        args:
+          - --cache
+          - "2048"
+          - --datadir
+          - /root/data/eth
+          - --syncmode
+          - full
+          - --rpc
+          - --rpcapi
+          - web3,eth,net,personal
+        ports:
+        - name: p2p-port
+          containerPort: 30303
+        - name: rpc-port
+          containerPort: 8545
+        volumeMounts:
+        - mountPath: /root/data/
+          name: data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: YOUR_NODE_NAME-claim
