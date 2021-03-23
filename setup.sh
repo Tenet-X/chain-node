@@ -2,7 +2,6 @@
 read -t 30 -p "Please input GKE cluster name: " CLUSTER_NAME
 echo "GKE cluster name: $CLUSTER_NAME"
 
-
 read -t 30 -p "Please input chain name: " CHAIN_NAME
 echo "Chain name: $CHAIN_NAME"
 
