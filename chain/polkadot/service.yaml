@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: YOUR_NODE_NAME-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: YOUR_NODE_NAME
+  ports:
+  - name: p2p-port
+    port: 9933
+    protocol: TCP
+    targetPort: 9933
+  # - name: ws-port
+  #   port: 9944
+  #   protocol: TCP
+  #   targetPort: 9944
+  - name: mon-port
+    port: 9615
+    protocol: TCP
+    targetPort: 9615
+  - name: rest-api-port
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
