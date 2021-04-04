@@ -23,7 +23,7 @@ spec:
   #   port: 8080
   #   protocol: TCP
   #   targetPort: 8080
-  - name: polkdot-agent-port
+  - name: agent-port
     port: 8080
     protocol: TCP
     targetPort: 8080

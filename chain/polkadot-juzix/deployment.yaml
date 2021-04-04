@@ -65,7 +65,7 @@ spec:
       - name: polkdot-agent
         image: "gcr.io/local-alignment-284902/polkdot-agent:v1"
         ports:
-        - name: polkdot-agent-port
+        - name: agent-port
           containerPort: 8080
       volumes:
       - name: data
