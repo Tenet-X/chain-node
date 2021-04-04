@@ -43,17 +43,17 @@ spec:
         volumeMounts:
         - mountPath: /work/data/
           name: data
+      - name: substrate-api-sidecar
+        image: "docker.io/parity/substrate-api-sidecar:latest"
+        ports:
+        - name: rest-api-port
+          containerPort: 8080
       - name: polkadot-agent
         image: "gcr.io/g-hash-community/polkadot-agent:v1"
         imagePullPolicy: Always
         ports:
         - name: agent-port
           containerPort: 8443
-      - name: substrate-api-sidecar
-        image: "docker.io/parity/substrate-api-sidecar:latest"
-        ports:
-        - name: rest-api-port
-          containerPort: 8080
       volumes:
       - name: data
         persistentVolumeClaim:
