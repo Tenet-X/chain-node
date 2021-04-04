@@ -7,7 +7,7 @@ spec:
   selector:
     app: YOUR_NODE_NAME
   ports:
-  - name: p2p-port
+  - name: rpc-port
     port: 9933
     protocol: TCP
     targetPort: 9933

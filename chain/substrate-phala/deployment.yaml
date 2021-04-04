@@ -40,9 +40,9 @@ spec:
           - --ws-port=9944
           - --prometheus-external
         ports:
-        - name: p2p-port
-          containerPort: 9933
         - name: rpc-port
+          containerPort: 9933
+        - name: ws-port
           containerPort: 9944
         - name: mon-port
           containerPort: 9615

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: YOUR_NODE_NAME-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: YOUR_NODE_NAME
+  ports:
+  - name: rpc-port
+    port: 9933
+    protocol: TCP
+    targetPort: 9933
+  - name: agent-port
+    port: 8080
+    protocol: TCP
+    targetPort: 8080

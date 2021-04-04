@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: YOUR_NODE_NAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: YOUR_NODE_NAME
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: YOUR_NODE_NAME
+        type: full
+    spec:
+      containers:
+      - name: substrate-polkdot-node
+        image: "gcr.io/g-hash-community/substrate-polkadot:v1"
+        imagePullPolicy: Always
+        env:
+          - name: NODE_NAME
+            value: YOUR_NODE_NAME
+        command:
+          - /work/bin/polkadot
+          - --pruning=archive
+          - --rpc-external
+          - --ws-external
+          - --rpc-cors=all
+          - --base-path
+          - /work/data/
+          - --chain
+          - polkadot
+          - --name OKEX
+        ports:
+        - name: rpc-port
+          containerPort: 9933
+        - name: sidecar-port
+          containerPort: 8080
+        volumeMounts:
+        - mountPath: /work/data/
+          name: data
+      # - name: polkadot-agent
+      #   image: "gcr.io/g-hash-community/polkadot-agent:v1"
+      #   imagePullPolicy: Always
+      #   ports:
+      #   - name: agent-port
+      #     containerPort: 8080
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: YOUR_NODE_NAME-claim
