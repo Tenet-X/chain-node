@@ -33,7 +33,7 @@ spec:
         volumeMounts:
         - mountPath: /root/data/
           name: data
-      - name: polkdot-agent
+      - name: platon-agent
         image: "gcr.io/g-hash-community/polkdot-agent:v1"
         ports:
         - name: agent-port
