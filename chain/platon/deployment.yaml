@@ -22,9 +22,6 @@ spec:
       - name: platon-node
         image: "gcr.io/g-hash-community/platon-node:v1"
         imagePullPolicy: Always
-        env:
-          - name: NODE_NAME
-            value: YOUR_NODE_NAME
         ports:
         - name: p2p-port
           containerPort: 16789

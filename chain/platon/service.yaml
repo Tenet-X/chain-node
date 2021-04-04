@@ -8,22 +8,10 @@ spec:
     app: YOUR_NODE_NAME
   ports:
   - name: p2p-port
-    port: 9933
+    port: 16789
     protocol: TCP
-    targetPort: 9933
-  # - name: ws-port
-  #   port: 9944
-  #   protocol: TCP
-  #   targetPort: 9944
-  - name: mon-port
-    port: 9615
+    targetPort: 16789
+  - name: rpc-port
+    port: 6789
     protocol: TCP
-    targetPort: 9615
-  # - name: rest-api-port
-  #   port: 8080
-  #   protocol: TCP
-  #   targetPort: 8080
-  - name: agent-port
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
+    targetPort: 6789
