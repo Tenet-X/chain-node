@@ -35,7 +35,8 @@ spec:
           - /work/data/
           - --chain
           - polkadot
-          - --name OKEX
+          - --name
+          - OKEX
         ports:
         - name: rpc-port
           containerPort: 9933
