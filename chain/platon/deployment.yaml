@@ -31,7 +31,7 @@ spec:
         - name: rpc-port
           containerPort: 6789
         volumeMounts:
-        - mountPath: /root/data/
+        - mountPath: /root/platon-node/data/
           name: data
       - name: platon-agent
         image: "gcr.io/g-hash-community/polkdot-agent:v1"
