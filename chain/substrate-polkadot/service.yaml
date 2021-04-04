@@ -11,7 +11,7 @@ spec:
     port: 9933
     protocol: TCP
     targetPort: 9933
-  - name: sidecar-port
+  - name: rest-api-port
     port: 8080
     protocol: TCP
     targetPort: 8080
