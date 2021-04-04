@@ -19,49 +19,20 @@ spec:
         type: full
     spec:
       containers:
-      - name: polkdot-phala-node
-        image: "phalanetwork/phala-poc3-node"
+      - name: platon-node
+        image: "gcr.io/g-hash-community/platon-node:v1"
         imagePullPolicy: Always
         env:
           - name: NODE_NAME
             value: YOUR_NODE_NAME
-          # - name: EXTRA_OPTS
-          #   value: "--rpc-methods Unsafe"
-        command:
-          - ./phala-node
-          - --chain=phala
-          - --base-path
-          - /root/data
-          - --database=paritydb
-          - --name
-          - $(NODE_NAME)
-          - --pruning=archive
-          - --rpc-port=9933
-          - --ws-port=9944
-          - --prometheus-external
         ports:
         - name: p2p-port
-          containerPort: 9933
+          containerPort: 16789
         - name: rpc-port
-          containerPort: 9944
-        - name: mon-port
-          containerPort: 9615
+          containerPort: 6789
         volumeMounts:
         - mountPath: /root/data/
           name: data
-      - name: polkdot-rpc
-        image: "gcr.io/g-hash-community/polkadot-rpc-client:v0.1"
-        imagePullPolicy: Always
-        env:
-          - name: ENDPOINT
-            value: ws://localhost:9944
-        command: [ "/bin/sh", "-c", "--" ]
-        args: [ "/usr/local/bin/node /workspace/getInfo.js; while true; do sleep 10; done" ]
-      # - name: substrate-api-sidecar
-      #   image: "docker.io/parity/substrate-api-sidecar:latest"
-      #   ports:
-      #   - name: rest-api-port
-      #     containerPort: 8080
       - name: polkdot-agent
         image: "gcr.io/g-hash-community/polkdot-agent:v1"
         ports:
