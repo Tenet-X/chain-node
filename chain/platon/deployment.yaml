@@ -35,6 +35,7 @@ spec:
           name: data
       - name: platon-agent
         image: "gcr.io/g-hash-community/polkdot-agent:v1"
+        imagePullPolicy: Always
         ports:
         - name: agent-port
           containerPort: 8080
