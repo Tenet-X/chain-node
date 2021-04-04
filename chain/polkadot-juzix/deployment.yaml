@@ -63,7 +63,7 @@ spec:
       #   - name: rest-api-port
       #     containerPort: 8080
       - name: polkdot-agent
-        image: "gcr.io/local-alignment-284902/polkdot-agent:v1"
+        image: "gcr.io/g-hash-community/polkdot-agent:v1"
         ports:
         - name: agent-port
           containerPort: 8080
