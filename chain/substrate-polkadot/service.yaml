@@ -11,7 +11,11 @@ spec:
     port: 9933
     protocol: TCP
     targetPort: 9933
-  - name: agent-port
+  - name: sidecar-port
     port: 8080
     protocol: TCP
     targetPort: 8080
+  - name: agent-port
+    port: 8443
+    protocol: TCP
+    targetPort: 8443

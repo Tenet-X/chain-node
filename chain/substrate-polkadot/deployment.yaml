@@ -45,12 +45,12 @@ spec:
         volumeMounts:
         - mountPath: /work/data/
           name: data
-      # - name: polkadot-agent
-      #   image: "gcr.io/g-hash-community/polkadot-agent:v1"
-      #   imagePullPolicy: Always
-      #   ports:
-      #   - name: agent-port
-      #     containerPort: 8080
+      - name: polkadot-agent
+        image: "gcr.io/g-hash-community/polkadot-agent:v1"
+        imagePullPolicy: Always
+        ports:
+        - name: agent-port
+          containerPort: 8443
       volumes:
       - name: data
         persistentVolumeClaim:
