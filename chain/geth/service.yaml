@@ -11,7 +11,7 @@ spec:
     port: 30303
     protocol: TCP
     targetPort: 30303
-  # - name: rpc-port
-  #   port: 8545
-  #   protocol: TCP
-  #   targetPort: 8545
+  - name: rpc-port
+    port: 8545
+    protocol: TCP
+    targetPort: 8545
