@@ -18,8 +18,8 @@ steps:
       gcloud builds submit --config=build-image/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID}
 
 - name: "gcr.io/cloud-builders/gcloud"
-  id: "create-cluster"
-  dir: "create-cluster"
+  id: "create-cluster-eth"
+  dir: "create-cluster-eth"
   entrypoint: 'bash'
   args:
     - '-c'
@@ -36,4 +36,4 @@ steps:
     - |
       gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME}
   waitFor:
-    - create-cluster
+    - create-cluster-eth
