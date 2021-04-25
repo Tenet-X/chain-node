@@ -6,6 +6,7 @@ substitutions:
   _GCP_REGION: ${GCP_REGION}
   _NODE_NAME: ${NODE_NAME}
   _CLUSTER_NAME: ${CLUSTER_NAME}
+  _CHAIN_NAME: ${CHAIN_NAME}
 options:
   substitution_option: 'ALLOW_LOOSE'
 steps:
@@ -34,6 +35,6 @@ steps:
   args:
     - '-c'
     - |
-      gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME}
+      gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=${CHAIN_NAME}
   waitFor:
     - create-cluster-eth

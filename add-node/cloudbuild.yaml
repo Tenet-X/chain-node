@@ -26,7 +26,7 @@ steps:
       kubectl apply -f chain/${_CHAIN_NAME}/pvc.yaml
       kubectl apply -f chain/${_CHAIN_NAME}/deployment.yaml
       kubectl apply -f chain/${_CHAIN_NAME}/service.yaml
-      
+
       # if [ $_CHAIN_NAME = "geth" ]
       # then
       #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/deployment.yaml
