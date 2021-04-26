@@ -35,7 +35,7 @@ steps:
   args:
     - '-c'
     - |
-      for chain in "geth" "platon" "substrate-phala" "substrate-polkdot"
+      for chain in "geth" "platon" "substrate-phala" "substrate-polkadot"
       do
         NODE="${_NODE_NAME}-$chain"
         gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=$$NODE,_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=$chain
