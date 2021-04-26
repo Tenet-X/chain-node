@@ -37,8 +37,8 @@ steps:
     - |
       for chain in "geth" "platon" "substrate-phala" "substrate-polkdot"
       do
-        NODE="${_NODE_NAME}_$chain"
-        gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=NODE,_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=$chain
+        NODE="${_NODE_NAME}-$chain"
+        gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=$$NODE,_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=$chain
       done
   waitFor:
     - create-cluster-demo
