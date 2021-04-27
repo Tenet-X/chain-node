@@ -26,32 +26,3 @@ steps:
       kubectl apply -f chain/${_CHAIN_NAME}/pvc.yaml
       kubectl apply -f chain/${_CHAIN_NAME}/deployment.yaml
       kubectl apply -f chain/${_CHAIN_NAME}/service.yaml
-
-      # if [ $_CHAIN_NAME = "geth" ]
-      # then
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/deployment.yaml
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/pvc.yaml
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/service.yaml
-      #
-      #   kubectl apply -f chain/geth/pvc.yaml
-      #   kubectl apply -f chain/geth/deployment.yaml
-      #   kubectl apply -f chain/geth/service.yaml
-      # elif [ $_CHAIN_NAME = "polkadot" ]
-      # then
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/polkadot/deployment.yaml
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/polkadot/pvc.yaml
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/polkadot/service.yaml
-      #
-      #   kubectl apply -f chain/polkadot/pvc.yaml
-      #   kubectl apply -f chain/polkadot/deployment.yaml
-      #   kubectl apply -f chain/polkadot/service.yaml
-      # elif [ $_CHAIN_NAME = "polkadot-juzix" ]
-      # then
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/${_CHAIN_NAME}/deployment.yaml
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/${_CHAIN_NAME}/pvc.yaml
-      #   sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/${_CHAIN_NAME}/service.yaml
-      #
-      #   kubectl apply -f chain/${_CHAIN_NAME}/pvc.yaml
-      #   kubectl apply -f chain/${_CHAIN_NAME}/deployment.yaml
-      #   kubectl apply -f chain/${_CHAIN_NAME}/service.yaml
-      # fi
