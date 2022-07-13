@@ -19,7 +19,7 @@ spec:
         type: full
     spec:
       containers:
-      - name: polkdot-geth-node
+      - name: ethereum-geth-node
         image: "ethereum/client-go"
         imagePullPolicy: Always
         args:
