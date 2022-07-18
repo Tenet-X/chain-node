@@ -19,18 +19,30 @@ spec:
         type: full
     spec:
       containers:
-      - name: platon-node
-        image: "gcr.io/g-hash-community/platon-node:v1"
+      - name: polkdot-geth-node
+        image: "ethereum/client-go"
         imagePullPolicy: Always
+        args:
+          - --cache
+          - "2048"
+          - --datadir
+          - /root/data/eth
+          - --syncmode
+          - full
+          - --http
+          - --http.api
+          - web3,eth,net,personal
+          - --http.addr
+          - "0.0.0.0"
         ports:
         - name: p2p-port
-          containerPort: 16789
+          containerPort: 30303
         - name: rpc-port
-          containerPort: 6789
+          containerPort: 8545
         volumeMounts:
-        - mountPath: /root/platon-node/data/
+        - mountPath: /root/data/
           name: data
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: YOUR_NODE_NAME-claim
+          claimName: pvc-restore

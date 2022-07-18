@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: YOUR_NODE_NAME-etl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: YOUR_NODE_NAME-etl
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: YOUR_NODE_NAME-etl
+        tier: backend
+        type: full
+    spec:
+      containers:
+      - name: etl
+        image: "blockchainetl/ethereum-etl"
+        imagePullPolicy: Always
+        args:
+          - export_token_transfers
+          - --start-block
+          - "0"
+          - --end-block
+          - "2000"
+          - --provider-uri
+          - http://IP_ADDR:8545
+        ports:
+        - name: http
+          containerPort: 80

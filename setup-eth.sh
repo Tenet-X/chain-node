@@ -1,11 +1,13 @@
 #!/bin/bash -xe
-read -t 30 -p "Please input GKE cluster name: " CLUSTER_NAME
+CLUSTER_NAME=cluster2
+# read -t 30 -p "Please input GKE cluster name: " CLUSTER_NAME
 echo "GKE cluster name: $CLUSTER_NAME"
 
-read -t 30 -p "Please input chain name: " CHAIN_NAME
-echo "Chain name: $CHAIN_NAME"
-
-read -t 30 -p "Please input full node name: " NODE_NAME
+# read -t 30 -p "Please input chain name: " CHAIN_NAME
+# echo "Chain name: $CHAIN_NAME"
+CHAIN_NAME=geth
+NODE_NAME=node2
+# read -t 30 -p "Please input full node name: " NODE_NAME
 echo "Full node name: $NODE_NAME"
 
 export CLUSTER_NAME=$CLUSTER_NAME

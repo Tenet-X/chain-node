@@ -1,9 +1,14 @@
 timeout: 3600s
 tags:
   - open-node-platform
-  - snapshot
 substitutions:
   _PROJECT_ID: ${PROJECT_ID}
+  _GCP_REGION: ${GCP_REGION}
+  _NODE_NAME: ${NODE_NAME}
+  _CLUSTER_NAME: ${CLUSTER_NAME}
+  _CHAIN_NAME: ${CHAIN_NAME}
+options:
+  substitution_option: 'ALLOW_LOOSE'
 steps:
 - name: "gcr.io/cloud-builders/gcloud"
   id: "build-install-image"
@@ -13,24 +18,23 @@ steps:
     - |
       gcloud builds submit --config=build-image/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID}
 
-- name: "gcr.io/${_PROJECT_ID}/open-node-platform-installer"
-  id: "create-snapshot"
-  dir: "create-snapshot"
+- name: "gcr.io/cloud-builders/gcloud"
+  id: "create-cluster-eth"
+  dir: "create-cluster-eth"
   entrypoint: 'bash'
   args:
     - '-c'
     - |
-      NOW=$(date +"%m-%d-%Y")
-      snapshot_name="snapshot.$NOW"
-      kubectl apply -f - <<EOF
-      apiVersion: snapshot.storage.k8s.io/v1beta1
-      kind: VolumeSnapshot
-      metadata:
-        name: $$snapshot_name
-      spec:
-        volumeSnapshotClassName: snapshot-class
-      source:
-        persistentVolumeClaimName: full-node-geth-claim
-      EOF
+      gcloud builds submit --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME}
   waitFor:
     - build-install-image
+
+- name: "gcr.io/cloud-builders/gcloud"
+  id: "add-node"
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=${_CHAIN_NAME}
+  waitFor:
+    - create-cluster-eth

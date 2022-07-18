@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: YOUR_NODE_NAME-etl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: YOUR_NODE_NAME-etl
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: YOUR_NODE_NAME-etl
+        type: full
+    spec:
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: pubsub-key
+      containers:
+      - name: etl
+        image: "blockchainetl/ethereum-etl"
+        imagePullPolicy: Always
+        args:
+          - stream
+          - --provider-uri
+          - http://IP_ADDR:8545
+          - --output
+          # projects/<your-project>/topics/crypto_ethereum
+          - projects/YOUR_PROJECT/topics/crypto_ethereum
+        volumeMounts:
+        - name: google-cloud-key
+          mountPath: /var/secrets/google
+        env:
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /var/secrets/google/key.json    
+        ports:
+        - name: http
+          containerPort: 80

@@ -29,10 +29,10 @@ spec:
           - /root/data/eth
           - --syncmode
           - full
-          - --rpc
-          - --rpcapi
+          - --http
+          - --http.api
           - web3,eth,net,personal
-          - --rpcaddr
+          - --http.addr
           - "0.0.0.0"
         ports:
         - name: p2p-port

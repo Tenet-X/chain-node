@@ -1,9 +1,13 @@
 #!/bin/bash -xe
-gcloud config set compute/region us-central1
-read -t 30 -p "Please input GKE cluster name: " CLUSTER_NAME
+CLUSTER_NAME=cluster2
+# read -t 30 -p "Please input GKE cluster name: " CLUSTER_NAME
 echo "GKE cluster name: $CLUSTER_NAME"
 
-read -t 30 -p "Please input full node name: " NODE_NAME
+# read -t 30 -p "Please input chain name: " CHAIN_NAME
+# echo "Chain name: $CHAIN_NAME"
+CHAIN_NAME=geth
+NODE_NAME=node2
+# read -t 30 -p "Please input full node name: " NODE_NAME
 echo "Full node name: $NODE_NAME"
 
 export CLUSTER_NAME=$CLUSTER_NAME
@@ -37,4 +41,4 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com \
      --role roles/compute.storageAdmin
 
-gcloud builds submit --config=./cloudbuild-demo.yaml --substitutions=_PROJECT_ID=${PROJECT_ID},_GCP_REGION=${GCP_REGION},_NODE_NAME=${NODE_NAME},_CLUSTER_NAME=${CLUSTER_NAME}
+gcloud builds submit --config=./cloudbuild-demo.yaml --substitutions=_PROJECT_ID=${PROJECT_ID},_GCP_REGION=${GCP_REGION},_NODE_NAME=${NODE_NAME},_CLUSTER_NAME=${CLUSTER_NAME},_CHAIN_NAME=${CHAIN_NAME}

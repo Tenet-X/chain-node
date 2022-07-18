@@ -16,7 +16,7 @@ steps:
     - '-xe'
     - '-c'
     - |
-      git clone -b dev https://github.com/Tenet-X/open-node.git
+     # git clone -b dev https://github.com/Tenet-X/open-node.git
 
       sed -i'' -e  "s/PROJECT_ID/${_PROJECT_ID}/g" terraform.tfvars
       sed -i'' -e  "s/GCP_REGION/${_GCP_REGION}/g" terraform.tfvars

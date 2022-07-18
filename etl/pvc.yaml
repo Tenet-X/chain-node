@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: YOUR_NODE_NAME-claim
+  name: node13-etl-claim
 spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: standard-rwo
   resources:
     requests:
-      storage: 60Gi
+      storage: 1Gi

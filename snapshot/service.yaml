@@ -8,10 +8,10 @@ spec:
     app: YOUR_NODE_NAME
   ports:
   - name: p2p-port
-    port: 16789
+    port: 30303
     protocol: TCP
-    targetPort: 16789
+    targetPort: 30303
   - name: rpc-port
-    port: 6789
+    port: 8545
     protocol: TCP
-    targetPort: 6789
+    targetPort: 8545

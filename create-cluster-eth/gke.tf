@@ -17,8 +17,8 @@ variable "gke_num_nodes" {
 resource "google_container_cluster" "primary" {
   name         = var.cluster_name
   location     = var.region
-  node_version = "1.18"
-  min_master_version = "1.18"
+  node_version = "1.20"
+  min_master_version = "1.20"
 
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -47,6 +47,7 @@ resource "google_container_node_pool" "primary_nodes" {
     oauth_scopes = [
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
+      "https://www.googleapis.com/auth/cloud-platform",
     ]
 
     labels = {

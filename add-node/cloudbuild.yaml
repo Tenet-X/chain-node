@@ -19,7 +19,7 @@ steps:
     - |
       gcloud container clusters get-credentials ${_CLUSTER_NAME} --region ${_GCP_REGION}
 
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/${_CHAIN_NAME}/deployment.yaml
+      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/deployment.yaml
       sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/${_CHAIN_NAME}/pvc.yaml
       sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/${_CHAIN_NAME}/service.yaml
 
