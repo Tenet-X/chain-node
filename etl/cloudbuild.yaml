@@ -22,17 +22,14 @@ steps:
       # IP=$(kubectl get service ${"${_NODE_NAME}-service"}--output yaml  | grep 'ip:    ' | sed  "s/- ip:    //g")
 
       sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" etl/deployment.yaml
-      
       sed -i'' -e  "s/YOUR_PROJECT/${_PROJECT_ID}/g" etl/deployment.yaml
-      
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" etl/pvc.yaml
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" etl/service.yaml
+
       sed -i'' -e  "s/IP_ADDR/$(kubectl get service ${_NODE_NAME}-service --output yaml  |  grep 'ip:' | sed  "s/    - ip: //g")/g" etl/deployment.yaml
-      # kubectl apply -f etl/pvc.yaml
-      # gcloud pubsub topics create crypto_ethereum.blocks
-      # gcloud pubsub subscriptions create crypto_ethereum.blocks.test --topic=crypto_ethereum.blocks
+
+      gcloud pubsub topics create crypto_ethereum.blocks
+      gcloud pubsub subscriptions create crypto_ethereum.blocks.test --topic=crypto_ethereum.blocks
+      # 
       # gcloud pubsub subscriptions create crypto_ethereum.blocks.test --topic=crypto_ethereum.transactions
       kubectl apply -f etl/deployment.yaml
-      # kubectl apply -f etl/service.yaml
       
       
