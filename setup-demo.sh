@@ -1,5 +1,5 @@
 #!/bin/bash -xe
-CLUSTER_NAME=cluster2
+CLUSTER_NAME=cluster3
 # read -t 30 -p "Please input GKE cluster name: " CLUSTER_NAME
 echo "GKE cluster name: $CLUSTER_NAME"
 

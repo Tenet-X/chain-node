@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: YOUR_NODE_NAMEsnap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: YOUR_NODE_NAMEsnap
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: YOUR_NODE_NAMEsnap
+        type: snap
+    spec:
+      containers:
+      - name: ethereum-geth-node
+        image: "ethereum/client-go"
+        imagePullPolicy: Always
+        args:
+          - --cache
+          - "2048"
+          - --datadir
+          - /root/data/eth
+          - --syncmode
+          - snap
+          - --http
+          - --http.api
+          - web3,eth,net,personal
+          - --http.addr
+          - "0.0.0.0"
+        ports:
+        - name: p2p-port
+          containerPort: 30303
+        - name: rpc-port
+          containerPort: 8545
+        volumeMounts:
+        - mountPath: /root/data/
+          name: data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: YOUR_NODE_NAME-snap-claim
