@@ -72,4 +72,10 @@ If you want to create snapshot for the full node, please set the node name and t
 ```
 For detailed information about creating snapshot, please refer to https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/volume-snapshots?hl=zh-cn#v1beta1
 ### Restore from snapshot
+Once you have snapshot created, please set the node name and the cluster name and run the following command.
+```
+./restore-from-snapshot.sh
+```
+
+
 
