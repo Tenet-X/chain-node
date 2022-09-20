@@ -27,11 +27,12 @@ spec:
         image: "blockchainetl/ethereum-etl"
         imagePullPolicy: Always
         args:
-          - stream
+          - stream 
+          - -e
+          - block, transaction
           - --provider-uri
           - http://IP_ADDR:8545
           - --output
-          # projects/<your-project>/topics/crypto_ethereum
           - projects/YOUR_PROJECT/topics/crypto_ethereum
         volumeMounts:
         - name: google-cloud-key

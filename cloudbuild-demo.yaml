@@ -19,13 +19,13 @@ steps:
       gcloud builds submit --config=build-image/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID}
 
 - name: "gcr.io/cloud-builders/gcloud"
-  id: "create-cluster-demo"
-  dir: "create-cluster-demo"
+  id: "create-cluster-eth"
+  dir: "create-cluster-eth"
   entrypoint: 'bash'
   args:
     - '-c'
     - |
-      gcloud builds submit --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME}
+      gcloud builds submit --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=${_CHAIN_NAME}
   waitFor:
     - build-install-image
 
@@ -35,13 +35,10 @@ steps:
   args:
     - '-c'
     - |
-      for chain in "geth" "platon" "substrate-phala" "substrate-polkadot"
-      do
-        NODE="${_NODE_NAME}-$chain"
-        gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=$$NODE,_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=$chain
-      done
+      gcloud builds submit --config=add-node/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=${_CHAIN_NAME}
+
   waitFor:
-    - create-cluster-demo
+    - create-cluster-eth
 
 - name: "gcr.io/${_PROJECT_ID}/open-node-platform-installer"
   id: "add-etl"
@@ -50,20 +47,6 @@ steps:
     - '-xe'
     - '-c'
     - |
-      
-      gcloud container clusters get-credentials ${_CLUSTER_NAME} --region ${_GCP_REGION}
-      # IP=$(kubectl get service ${"${_NODE_NAME}-service"}--output yaml  | grep 'ip:    ' | sed  "s/- ip:    //g")
-
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" etl/deployment.yaml
-      
-      sed -i'' -e  "s/YOUR_PROJECT/${_PROJECT_ID}/g" etl/deployment.yaml
-      
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" etl/pvc.yaml
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" etl/service.yaml
-      sed -i'' -e  "s/IP_ADDR/$(kubectl get service ${_NODE_NAME}-service --output yaml  |  grep 'ip:' | sed  "s/    - ip: //g")/g" etl/deployment.yaml
-      # kubectl get services ${es_cluster_name}-es-http -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
-      gcloud pubsub topics create crypto_ethereum.blocks
-      gcloud pubsub subscriptions create crypto_ethereum.blocks.test --topic=crypto_ethereum.blocks
-      kubectl apply -f etl/deployment.yaml
+      gcloud builds submit --config=etl/cloudbuild.yaml --substitutions=_PROJECT_ID=${_PROJECT_ID},_GCP_REGION=${_GCP_REGION},_NODE_NAME=${_NODE_NAME},_CLUSTER_NAME=${_CLUSTER_NAME},_CHAIN_NAME=${_CHAIN_NAME}
   waitFor:
     - add-node

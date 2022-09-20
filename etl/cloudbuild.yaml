@@ -25,7 +25,7 @@ steps:
       
       export FULL_NODE_SVC_NAME=$_NODE_NAME-service
       export FULL_NODE_IP=$(kubectl get svc $$FULL_NODE_SVC_NAME -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-      sed -i'' -e  "s/IP_ADDR/$${FULL_NODE_IP}/g" k8s/deployment-validator.yaml
+      sed -i'' -e  "s/IP_ADDR/$${FULL_NODE_IP}/g" etl/deployment.yaml
 
 
       gcloud pubsub topics create crypto_ethereum.blocks

@@ -17,6 +17,7 @@ steps:
     - |
       gcloud container clusters get-credentials ${_CLUSTER_NAME} --region ${_GCP_REGION}
       NOW=$(date +"%m-%d-%Y")
-      # sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" snapshot.yaml
-      # sed -i'' -e  "s/TIME/${NOW}/g" snapshot.yaml
-      kubectl apply -f snapshot/deployment.yaml
+      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" volumnsnapshot.yaml
+      sed -i'' -e  "s/TIME/${NOW}/g" volumnsnapshot.yaml
+      kubectl apply -f snapshot/volumnsnapshotclass.yaml
+      kubectl apply -f snapshot/volumnsnapshot.yaml

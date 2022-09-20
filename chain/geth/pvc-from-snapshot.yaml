@@ -1,8 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: YOUR_NODE_NAME-snap-claim
+  name: YOUR_NODE_NAME-claim
 spec:
+  dataSource:
+    name: snapshot
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
   accessModes:
     - ReadWriteOnce
   storageClassName: standard-rwo

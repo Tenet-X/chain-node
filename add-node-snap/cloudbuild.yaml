@@ -18,10 +18,10 @@ steps:
     - |
       gcloud container clusters get-credentials ${_CLUSTER_NAME} --region ${_GCP_REGION}
 
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chainsnap/geth/deployment.yaml
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chainsnap/geth/pvc.yaml
-      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chainsnap/geth/service.yaml
+      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/deployment.yaml
+      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/pvc-from-snapshot.yaml
+      sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/service.yaml
 
-      kubectl apply -f chainsnap/geth/pvc.yaml
-      kubectl apply -f chainsnap/geth/deployment.yaml
-      kubectl apply -f chainsnap/geth/service.yaml
+      kubectl apply -f chain/geth/pvc-from-snapshot.yaml
+      kubectl apply -f chain/geth/deployment.yaml
+      kubectl apply -f chain/geth/service.yaml

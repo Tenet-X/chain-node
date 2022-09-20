@@ -48,7 +48,11 @@ If you want to add a new full node to current cluster, please run the following 
 ```
 ./add-node.sh
 ```
-The cluster name and the node name is by default cluster2 and node2 respectively.
+The cluster name and the node name is by default cluster1 and node1 respectively.
+If you want to customize the settings of Ethereum nodes. 
+You can visit [Go Ethereum](https://github.com/ethereum/go-ethereum) for more information. For example, you can change the [syncmode](https://github.com/Tenet-X/chain-node/blob/eth/chain/geth/deployment.yaml) to "snap"  to set up an Ethereum node more quickly.
+
+This script will first create a persistent volumn claim and then apply the deployment.
 
 ### Add etl node
 If you want to add a node that can listen to the full node and publish information using Pub/Sub, please run the following command.
@@ -76,6 +80,7 @@ Once you have snapshot created, please set the node name and the cluster name an
 ```
 ./restore-from-snapshot.sh
 ```
-
+### Create Scheduled snashot
+If you run your node in Google Cloud, you can attach a [snapshot schedule](https://cloud.google.com/compute/docs/disks/scheduled-snapshots#attach_snapshot_schedule) to it.
 
 
