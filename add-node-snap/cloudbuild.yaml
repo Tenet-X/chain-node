@@ -6,6 +6,7 @@ substitutions:
   _GCP_REGION: ${GCP_REGION}
   _NODE_NAME: ${NODE_NAME}
   _CLUSTER_NAME: ${CLUSTER_NAME}
+  _SNAPSHOT_NAME: ${SNAPSHOT_NAME}
 options:
   substitution_option: 'ALLOW_LOOSE'
 steps:
@@ -20,6 +21,7 @@ steps:
 
       sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/deployment.yaml
       sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/pvc-from-snapshot.yaml
+      sed -i'' -e  "s/SNAPSHOT_NAME/${_SNAPSHOT_NAME}/g" chain/geth/pvc-from-snapshot.yaml
       sed -i'' -e  "s/YOUR_NODE_NAME/${_NODE_NAME}/g" chain/geth/service.yaml
 
       kubectl apply -f chain/geth/pvc-from-snapshot.yaml

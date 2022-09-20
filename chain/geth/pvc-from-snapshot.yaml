@@ -4,7 +4,7 @@ metadata:
   name: YOUR_NODE_NAME-claim
 spec:
   dataSource:
-    name: snapshot
+    name:  SNAPSHOT_NAME
     kind: VolumeSnapshot
     apiGroup: snapshot.storage.k8s.io
   accessModes:
